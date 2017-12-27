@@ -106,7 +106,11 @@ def bci_unspent(*args):
     u = []
     for a in addrs:
         try:
-            data = make_request('https://blockchain.info/unspent?active='+a)
+            data = make_request(
+                'https://{}blockchain.info/unspent?active='.format(
+                    'testnet.' if network == 'testnet' else ''
+                ) + a
+            )
         except Exception as e:
             if str(e) == 'No free outputs to spend':
                 continue
